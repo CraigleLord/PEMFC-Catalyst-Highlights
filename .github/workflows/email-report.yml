@@ -1,0 +1,52 @@
+name: Email new PEMFC report
+
+on:
+  push:
+    paths:
+      - "reports/*.md"
+    branches:
+      - main
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Find new report file
+        id: report
+        run: |
+          NEW_FILE=$(git diff --name-only HEAD~1 HEAD -- 'reports/*.md' | head -1)
+          if [ -z "$NEW_FILE" ]; then
+            echo "No new report file found" && exit 0
+          fi
+          MONTH_LABEL=$(basename "$NEW_FILE" .md)
+          DISPLAY_MONTH=$(date -d "${MONTH_LABEL}-01" '+%B %Y' 2>/dev/null || echo "$MONTH_LABEL")
+          echo "file=$NEW_FILE" >> $GITHUB_OUTPUT
+          echo "month=$DISPLAY_MONTH" >> $GITHUB_OUTPUT
+          echo "url=https://github.com/CraigleLord/PEMFC-Catalyst-Highlights/blob/main/$NEW_FILE" >> $GITHUB_OUTPUT
+
+      - name: Send email
+        if: steps.report.outputs.file != ''
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 587
+          secure: false
+          username: ${{ secrets.GMAIL_USER }}
+          password: ${{ secrets.GMAIL_APP_PASSWORD }}
+          subject: "PEMFC Catalyst Research Highlights — ${{ steps.report.outputs.month }}"
+          to: dave.kwon12@gmail.com
+          from: PEMFC Digest <${{ secrets.GMAIL_USER }}>
+          body: |
+            Hi Dave,
+
+            Your monthly PEMFC Catalyst Research Highlights report for ${{ steps.report.outputs.month }} is ready.
+
+            Read it here:
+            ${{ steps.report.outputs.url }}
+
+            ---
+            Automated monthly digest · CraigleLord/PEMFC-Catalyst-Highlights
