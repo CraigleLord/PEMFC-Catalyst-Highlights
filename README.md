@@ -2,7 +2,7 @@
 
 Monthly digest of high-impact, peer-reviewed papers on proton exchange membrane fuel cell (PEMFC) electrocatalyst research.
 
-Each issue covers 12–15 papers with 5–7 bullet-point highlights and key figures per paper, delivered on the first of each month.
+Each issue covers all qualifying papers published in the prior month, with 5 bullet-point highlights and key figures per paper, delivered on the first of each month.
 
 ## Reports
 
@@ -19,4 +19,4 @@ Each issue covers 12–15 papers with 5–7 bullet-point highlights and key figu
 - Catalyst support materials and MEA-level performance
 - In situ/operando characterization of active phases
 
-*Peer-reviewed journals only. Automated monthly delivery.*
+*Original research only (no reviews/perspectives). Journals with Impact Factor > 10. No repeat papers across issues. Automated monthly delivery.*
