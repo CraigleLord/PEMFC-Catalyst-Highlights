@@ -9,6 +9,7 @@ Each issue covers all qualifying papers published in the prior month, with 5 bul
 | Month | Link |
 |-------|------|
 | May 2026 | [reports/2026-05.md](reports/2026-05.md) |
+| June 2026 | [reports/2026-06.md](reports/2026-06.md) |
 
 ## Scope
 
